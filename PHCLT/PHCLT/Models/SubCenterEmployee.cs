@@ -36,4 +36,10 @@ namespace PHCLT.Models
         public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; }
     }
+
+    public class standermaster
+    {
+        public int id { get; set; }
+        public string Stdname { get; set; }
+    }
 }

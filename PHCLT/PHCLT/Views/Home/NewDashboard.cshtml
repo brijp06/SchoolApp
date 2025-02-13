@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "NewDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    // Retrieve the value of the "UserType" session variable
+    string userType = Session["UserType"] as string;
+    string userfullname = Session["UsesFullname"] as string;
+
+}
+<link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<style>
+    /* Hide the table headers */
+    th {
+        display: none;
+    }
+
+    #rateTable th {
+        background-color: #f0f0f0; /* Light gray for header */
+    }
+
+    #rateTable td:nth-child(1),
+    #rateTable td:nth-child(3) {
+        background-color: gray; /* Gray background for Value 1 and Value 2 */
+        font-weight: bold; /* Bold text */
+    }
+</style>
+<section class="content">
+    <div class="container-fluid">
+     
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="addattendanceBox">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fa fa-user-check"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Add Attendance</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="addexammaster">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fa fa-wallet" style="font-size: 50px;"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Exam Type Master</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="addsubjectmaster">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-file-alt"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Subject Master</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="addMarks">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-calendar-check"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Add Marks</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="addNotification">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-bullhorn"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Add Notification</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!--<div class="col-lg-3 col-6">-->
+            <!-- small box -->
+            <!--<div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewBag.saving</h3>
+                        <p>બચત</p>
+                    </div>
+                    <div class="icon">
+
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a onclick="location.href='@Url.Action("DailyReport", "Reports", new { ledgerid = "42", ledgername = "બચત ખાતાવહી",fromdate="2024/04/01",todate="2025/03/31" })'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>-->
+            <!-- ./col -->
+            <!--<div class="col-lg-3 col-6">-->
+            <!-- small box -->
+            <!--<div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@ViewBag.udhar</h3>
+                        <p>ઉધાર બીલ બાકી ખાતર</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a onclick="location.href='@Url.Action("DailyReport", "Reports", new { ledgerid = "51", ledgername = "ઉધાર બીલ બાકી ખાતર ખાતાવહી",fromdate="2024/04/01",todate="2025/03/31" } )'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</section>
+
+
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script>
+    $(function () {
+        var today = new Date();
+
+        // Format today's date as yyyy-mm-dd
+        var formattedDate = today.toISOString().substr(0, 10);
+
+
+        // Set the value of the date picker input field
+        $('#txtEntryDate').val(formattedDate);
+    })
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#addattendanceBox").click(function () {
+            window.location.href = "/AddAttance/Index"; // Adjust this URL based on your MVC route
+        });
+        $("#addexammaster").click(function () {
+            window.location.href = "/ExamTypeMaster/ExamtypeMasterList"; // Adjust this URL based on your MVC route
+        });
+        $("#addsubjectmaster").click(function () {
+            window.location.href = "/SubjectMaster/SubjectMasterList"; // Adjust this URL based on your MVC route
+        });
+        $("#addMarks").click(function () {
+            window.location.href = "/AddMarks/Index"; // Adjust this URL based on your MVC route
+        });
+        $("#addNotification").click(function () {
+            window.location.href = "/AddNotification/Index"; // Adjust this URL based on your MVC route
+        });
+    });
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome Icons -->
+<!-- IonIcons -->
+<link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<!-- Theme style -->
+<link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="~/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="~/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- BS Stepper -->
+<link rel="stylesheet" href="~/plugins/bs-stepper/css/bs-stepper.min.css">
+<!-- dropzonejs -->
+<link rel="stylesheet" href="~/plugins/dropzone/min/dropzone.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+<link href="~/css/loader.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- OPTIONAL SCRIPTS -->
+<script src="~/plugins/chart.js/Chart.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="~/dist/js/pages/dashboard3.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="~/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="~/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="~/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<script src="~/plugins/inputmask/inputmask.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.js"></script>
+<script src="~/plugins/toastr/toastr.min.js"></script>
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/dashboard/dashboard.js"></script>
+
+
+

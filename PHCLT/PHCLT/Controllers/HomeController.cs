@@ -23,15 +23,24 @@ namespace HRMS.Controllers
 
         public ActionResult Dashboard()
         {
-            ViewBag.chiku = ob.FindOneString("select isnull(abs(sum(isnull(ReceiptAmt,0)) - sum(isnull(paymentamt,0))),0) from transactionmaster where partyaccountid=" + Convert.ToInt32(Session["UserId"]) + " and PurchaseAccountId=46");
-            ViewBag.keri = ob.FindOneString("select isnull(abs(sum(isnull(ReceiptAmt,0)) - sum(isnull(paymentamt,0))),0) from transactionmaster where partyaccountid=" + Convert.ToInt32(Session["UserId"]) + " and PurchaseAccountId=80");
-            ViewBag.saving = ob.FindOneString("select isnull(abs(sum(isnull(ReceiptAmt,0)) - sum(isnull(paymentamt,0))),0) from transactionmaster where partyaccountid=" + Convert.ToInt32(Session["UserId"]) + " and PurchaseAccountId=42");
-            ViewBag.udhar = ob.FindOneString("select isnull(abs(sum(isnull(ReceiptAmt,0)) - sum(isnull(paymentamt,0))),0) from transactionmaster where partyaccountid=" + Convert.ToInt32(Session["UserId"]) + " and PurchaseAccountId=51");
-            ViewBag.notice = ob.FindOneString("select Rem from Notice");
+            string ap = ob.FindOneString("select attand from Studentatd where sid=" + Convert.ToInt32(Session["UserId"]) + " and adate='" + DateTime.Now.Date.ToString("yyyy/MM/dd") +  "'");
+            if (ap == "P")
+            {
+                ViewBag.atd = "Present";
+            }
+            else
+            {
+                ViewBag.atd = "Absent";
+            }
+            ViewBag.std = ob.FindOneString("select std from Studentatd where sid=" + Convert.ToInt32(Session["UserId"]) + "");
 
             return View();
         }
-
+        public ActionResult NewDashboard()
+        {
+           
+            return View();
+        }
 
         public ActionResult UserDashboard()
         {
@@ -115,6 +124,26 @@ namespace HRMS.Controllers
 
 
                 return Json(loginResponse, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public JsonResult SaveToken(string dname, string plt, string appVersion, string currentToken)
+        {
+            try
+            {
+                ClsSystem ob = new ClsSystem();
+
+                var userId = HttpContext.Session["UserId"].ToString();
+
+                ob.excute("delete from WebPushToken where UserId='" + userId + "' and DeviceToken='" + currentToken + "'");
+
+                ob.excute("Insert Into WebPushToken(UserId,DeviceToken,Devicename,Deviceversion,deviced) values('" + userId + "','" + currentToken + "','" + dname + "','" + appVersion + "','" + plt + "')");
+                return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

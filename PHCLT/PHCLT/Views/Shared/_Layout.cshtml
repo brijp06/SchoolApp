@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Naik Consultant</title>
+    <title>Om Sai Infotech</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" asp-append-version="true" />
     <link href="~/css/extraloader.css" rel="stylesheet" />
     <link href="~/css/customstyle.css" rel="stylesheet" />
-
+    
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -58,8 +58,6 @@
     <div id="loader" class="loader">
         <div id="loading-bar-spinner" class="spinner"><div class="spinner-icon"></div></div>
     </div>
-
-
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -69,9 +67,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item" style="margin-top:7px;">
-                    <a style="color:blue;font-weight:bold">@userfullname <span class="text-success" id="spanSubDate"></span> </a>
-                </li>
+                @*<li class="nav-item" style="margin-top:7px;">
+                        <a style="color:blue;font-weight:bold">@userfullname <span class="text-success" id="spanSubDate"></span> </a>
+                    </li>*@
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -114,109 +112,109 @@
                         @if (!string.IsNullOrEmpty(userType) && userType == "Admin")
                         {
                             @*<li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-table"></i>
-                                    <p>
-                                        Master
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("PHCdetailList", "PHCDetail")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>PHC Detail</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("SubCenterList", "PHCDetail")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Sub Center</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("VilageList", "PHCDetail")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Village Master</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("SubCenterEmp", "SubCenterEmp")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Sub Center Employees</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-edit"></i>
-                                    <p>
-                                        Transaction
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("CustomerMaster", "CustMaster")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Customer Master</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("DailyCollectionEntry", "Transaction")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Daily Collection Entry</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-chart-pie"></i>
-                                    <p>
-                                        Reports
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("DailyReport", "Reports")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Daily Receipt Report</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("PendingReport", "Reports")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Pending Receipt Report</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Master
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("PHCdetailList", "PHCDetail")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>PHC Detail</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("SubCenterList", "PHCDetail")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Sub Center</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("VilageList", "PHCDetail")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Village Master</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("SubCenterEmp", "SubCenterEmp")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Sub Center Employees</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>
+                                            Transaction
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("CustomerMaster", "CustMaster")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Customer Master</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("DailyCollectionEntry", "Transaction")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daily Collection Entry</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-chart-pie"></i>
+                                        <p>
+                                            Reports
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("DailyReport", "Reports")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daily Receipt Report</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("PendingReport", "Reports")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Pending Receipt Report</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>*@
                         }
                         @if (!string.IsNullOrEmpty(userType) && userType == "User")
                         {
 
                             @*<li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-chart-pie"></i>
-                                    <p>
-                                        Reports
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a onclick="location.href='@Url.Action("UserReport", "Home")'" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Ledger Report</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-chart-pie"></i>
+                                        <p>
+                                            Reports
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a onclick="location.href='@Url.Action("UserReport", "Home")'" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ledger Report</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>*@
                         }
 
                         @*<li class="nav-item">
@@ -277,14 +275,92 @@
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2020-2024 <a href="#">Naik Consultant</a>.</strong>
+            <strong>Copyright &copy; 2020-2024 <a href="#">Om Sai Infotech</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
             </div>
         </footer>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-messaging.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA826U07wLYb7kx-koMP_u9uwuajHm9Ctw",
+            authDomain: "chankyaschool-6f741.firebaseapp.com",
+            projectId: "chankyaschool-6f741",
+            storageBucket: "chankyaschool-6f741.firebasestorage.app",
+            messagingSenderId: "189207919351",
+            appId: "1:189207919351:web:5bbb27844612c0ccfb31f2",
+            measurementId: "G-LXYMYBD7TF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+
+        // Initialize Firebase Cloud Messaging and get a reference to the service
+        const messaging = getMessaging(app);
+
+        getToken(messaging, { vapidKey: 'BD2_3iTk6XS9q1Mq72jOkSM4HyB2nmoygX3E4L8xa9jnU6xSevUyV_g-EJM-rMEblr5ORMw1dP4_tV7WjDYYOH0' }).then((currentToken) => {
+            if (currentToken) {
+                // Send the token to your server and update the UI if necessary
+                // ...
+                console.log(currentToken);
+                Savetoken(currentToken);
+
+            } else {
+                // Show permission request UI
+                console.log('No registration token available. Request permission to generate one.');
+                // ...
+                requestPermission();
+            }
+        }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+            // ...
+        });
+
+        function requestPermission() {
+            console.log('Requesting permission...');
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                }
+            });
+        }
+        function Savetoken(currentToken) {
+            var dname = navigator.userAgent;
+            var plt = navigator.platform;
+            var appVersion = navigator.appVersion;
+
+
+            $.ajax({
+                url: "/Home/SaveToken",
+                type: "GET",
+                data: { dname: dname, plt: plt, appVersion: appVersion, currentToken: currentToken }, // Pass selected standard
+                success: function (data) {
+                    $('#SubjectDropdown').empty();
+
+                    if (data && data.length > 0) {
+                        $('#SubjectDropdown').append('<option value="0">Please Select a Subject</option>');
+                        data.forEach(function (Subject) {
+                            $('#SubjectDropdown').append('<option value="' + Subject.Id + '">' + Subject.Subjectname + '</option>');
+                        });
+                    } else {
+                        //cmbTaluka.append('<option value="0">No Village found</option>');
+                    }
+                },
+                error: function () {
+                    alert("Failed to load data.");
+                }
+            });
+        }
+    </script>
     <!-- Bootstrap -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->

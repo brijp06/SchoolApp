@@ -3,6 +3,12 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    // Retrieve the value of the "UserType" session variable
+    string userType = Session["UserType"] as string;
+    string userfullname = Session["UsesFullname"] as string;
+
+}
 <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
 <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -11,6 +17,7 @@
     th {
         display: none;
     }
+
     #rateTable th {
         background-color: #f0f0f0; /* Light gray for header */
     }
@@ -23,44 +30,122 @@
 </style>
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>@ViewBag.chiku</h3>
-                        <p>ચીકુ</p>
+        <div class="col-md-4">
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">@userfullname</h3>
+                    <h5 class="widget-user-desc">@ViewBag.std</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <!--<div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header">3,200</h5>
+                                <span class="description-text">SALES</span>
+                            </div>-->
+                        <!-- /.description-block -->
+                        <!--</div>-->
+                        <!-- /.col -->
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header" style="color:green">@ViewBag.atd</h5>
+                                @*<span class="description-text">FOLLOWERS</span>*@
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <!--<div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header">35</h5>
+                                <span class="description-text">PRODUCTS</span>
+                            </div>-->
+                        <!-- /.description-block -->
+                        <!--</div>-->
+                        <!-- /.col -->
                     </div>
-                    <div class="icon">
-                        @*<i class="ion ion-bag"></i>*@
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a onclick="location.href='@Url.Action("DailyReport", "Reports", new { ledgerid = "46", ledgername = "ચીકુ ખાતાવહી" ,fromdate="2024/07/01",todate="2025/06/30"})'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <!-- /.row -->
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>@ViewBag.keri<sup style="font-size: 20px"></sup></h3>
+            <!-- /.widget-user -->
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="attendanceBox">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fa fa-user-check"></i></span>
 
-                        <p>કેરી</p>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Attendance</span>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a onclick="location.href='@Url.Action("DailyReport", "Reports", new { ledgerid = "80", ledgername = "કેરી ખાતાવહી",fromdate="2024/04/01",todate="2025/03/31" })'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <!-- /.info-box-content -->
                 </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fa fa-wallet" style="font-size: 50px;"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Fees</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box" id="examresult">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-file-alt"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Exam Result</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-calendar-check"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Exam Time Table</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1">
+                        <i class="fas fa-bullhorn"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Notification</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
             </div>
             <!--<div class="col-lg-3 col-6">-->
-                <!-- small box -->
-                <!--<div class="small-box bg-warning">
+            <!-- small box -->
+            <!--<div class="small-box bg-warning">
                     <div class="inner">
                         <h3>@ViewBag.saving</h3>
                         <p>બચત</p>
                     </div>
                     <div class="icon">
-                        
+
                         <i class="ion ion-stats-bars"></i>
                     </div>
                     <a onclick="location.href='@Url.Action("DailyReport", "Reports", new { ledgerid = "42", ledgername = "બચત ખાતાવહી",fromdate="2024/04/01",todate="2025/03/31" })'" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -68,8 +153,8 @@
             </div>-->
             <!-- ./col -->
             <!--<div class="col-lg-3 col-6">-->
-                <!-- small box -->
-                <!--<div class="small-box bg-danger">
+            <!-- small box -->
+            <!--<div class="small-box bg-danger">
                     <div class="inner">
                         <h3>@ViewBag.udhar</h3>
                         <p>ઉધાર બીલ બાકી ખાતર</p>
@@ -83,106 +168,8 @@
         </div>
     </div>
 </section>
-<section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">જંત્રી</h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Jantry Date:-</label>
-                            <div class="entry-date-div col-md-3">
-                            </div>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <div class="form-group">
-                                    @*<input type="date" class="form-control" id="txtEntryDate" onchange="Getdatagantri(this.value)" placeholder="Select Entry Date">*@
-                                    <input type="date" class="form-control" id="txtEntryDate" placeholder="Select Entry Date">
-                                    <label id="jantri1" style="color: blue;"></label>
-                                    <label id="jantri2" style="color: blue;"></label>
-                                    <label id="jantri3" style="color: blue;"></label>
-                                    <label>Jantry On:-</label><label id="jantrion" style="color: blue;"></label>
-                                    <label>Rate:-</label><label id="jantrirate" style="color: blue;"></label>
-                                    <table id="rateTable" border="1" cellpadding="10" style="display:none">
-                                        <thead>
-                                            <tr>
-                                                <th>Value 1</th>
-                                                <th>Rate 1</th>
-                                                <th>Value 2</th>
-                                                <th>Rate 2</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <!--<div class="form-group">-->
-                        @*<label id="jantri1"></label>*@
-                        <!--<label id="jantri1" style="color: blue;"></label>
-                        </div>
-                        <div class="form-group">-->
-                        @*<label id="jantri2"></label>*@
-                        <!--<label id="jantri2" style="color: blue;"></label>
-                        </div>
-                        <div class="form-group">-->
-                        @*<label id="jantri3"></label>*@
-                        <!--<label id="jantri3" style="color: blue;"></label>
-                        </div>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">નોટીશ</h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label id="notice" style="color: blue;">@ViewBag.notice</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
 
 <script>
@@ -198,7 +185,17 @@
     })
 
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#attendanceBox").click(function () {
+            window.location.href = "/Attanceshow/Index"; // Adjust this URL based on your MVC route
+        });
+        $("#examresult").click(function () {
+            window.location.href = "/ShowResult/Index"; // Adjust this URL based on your MVC route
+        });
+    });
+</script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome Icons -->

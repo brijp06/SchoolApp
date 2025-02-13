@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-6 d-flex align-items-center justify-content-end">
+    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("NewDashboard","Home")'">Home</button>
+</div>
+<div class="card-body">
+    <!-- Dropdown to select standard -->
+    <div class="form-group">
+        <label for="standardDropdown">Select Standard:</label>
+        <select id="standardDropdown" class="form-control">
+            <option value="STD-9">STD-9</option>
+            <option value="STD-10">STD-10</option>
+            <option value="STD-11">STD-11</option>
+            <option value="STD-12">STD-12</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="divDropdown">Select Div:</label>
+        <select id="divDropdown" class="form-control">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+    </div>
+
+
+    <div class="table-responsive">
+        <table id="productTable" class="table">
+            <thead>
+                <tr>
+                    <th style="display:none">ID</th>
+                    <th>Student Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated dynamically here -->
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-primary my-2" type="button" id="saveStudents">Save Students</button>
+    <button class="btn btn-secondary my-2" type="button" id="selectAll">Select All</button>
+</div>
+<!-- AdminLTE -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/plugins/toastr/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Load students when standard dropdown changes
+        $("#standardDropdown").change(function () {
+            loadStudentData();
+        });
+        $("#divDropdown").change(function () {
+            loadStudentData();
+        });
+
+        // Load students from the server
+        function loadStudentData() {
+            var selectedStandard = $("#standardDropdown").val();
+            var selecteddiv = $("#divDropdown").val();
+
+            $.ajax({
+                url: "/AddAttance/GetStudents",
+                type: "GET",
+                data: { standard: selectedStandard, Div: selecteddiv }, // Pass selected standard
+                success: function (data) {
+                    $("#productTable tbody").empty(); // Clear existing rows
+                    $.each(data, function (index, student) {
+                        var row = `
+                           <tr>
+                                <td style="display:none" class="student-id">${student.Id}</td>
+                                <td>${student.Name}</td>
+                                <td>
+                                    <input type="checkbox" class="student-checkbox" ${student.IsChecked ? 'checked' : ''} style="width: 20px; height: 20px;" />
+                                </td>
+                            </tr>`;
+                        $("#productTable tbody").append(row);
+                    });
+
+                    // Add event listener for checkbox changes
+                    $(".student-checkbox").change(function () {
+                        var row = $(this).closest("tr");
+                        if (!$(this).prop("checked")) {
+                            row.css("background-color", "#ffcccc"); // Change to red if unchecked
+                        } else {
+                            row.css("background-color", ""); // Reset color if checked
+                        }
+                    });
+                },
+                error: function () {
+                    alert("Failed to load data.");
+                }
+            });
+        }
+
+        // Load data on page load
+        loadStudentData();
+
+        // Save students using AJAX
+        $("#saveStudents").click(function () {
+            var selectedStandard = $("#standardDropdown").val();
+            var selecteddiv = $("#divDropdown").val();
+            var students = [];
+            $("#productTable tbody tr").each(function () {
+                var studentId = $(this).find(".student-id").text().trim(); // Get student ID
+                var studentName = $(this).find("td:eq(1)").text().trim(); // Get student name
+                var isChecked = $(this).find(".student-checkbox").prop("checked"); // Get checkbox status
+
+                students.push({
+                    Id: studentId, // Send student ID
+                    Name: studentName,
+                    IsChecked: isChecked,
+                    Standard: selectedStandard, // Include selected standard
+                    Div: selecteddiv
+                });
+            });
+
+            $.ajax({
+                url: "/AddAttance/SaveStudents",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ students: students }),
+                success: function (response) {
+                    //alert(response.message);
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Save.'
+                    })
+                    loadStudentData(); // Reload data after save
+                },
+                error: function () {
+                    alert("An error occurred while saving data.");
+                }
+            });
+        });
+
+        // Select all checkboxes when the "Select All" button is clicked
+        $("#selectAll").click(function () {
+            $(".student-checkbox").prop("checked", true).closest("tr").css("background-color", ""); // Reset background color
+        });
+    });
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

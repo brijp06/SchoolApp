@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* Custom Styles */
+    .table-container {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .pass {
+        color: green;
+        font-weight: bold;
+    }
+
+    .fail {
+        color: red;
+        font-weight: bold;
+    }
+    .summary-container {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+<div class="col-md-6 d-flex align-items-center justify-content-end">
+    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Dashboard","Home")'">Home</button>
+</div>
+<div class="card-body">
+
+    <div class="form-group">
+        <label for="ExamtypeDropdown">Select Exam Type:</label>
+        <select id="ExamtypeDropdown" class="form-control">
+        </select>
+    </div>
+    <div class="table-responsive">
+        <table id="productTable" class="table">
+            <thead>
+                <tr>
+                    <th style="display:none">ID</th>
+                    <th>Subject Name</th>
+                    <th>Marks</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated dynamically here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="summary-container">
+        <p>Total Marks: <span id="totalMarks">0</span></p>
+        <p>Total Percentage: <span id="totalPercentage">0%</span></p>
+    </div>
+</div>
+<!-- AdminLTE -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/plugins/toastr/toastr.min.js"></script>
+<script src="~/Scripts/ShowResult/Showresult.js"></script>
+

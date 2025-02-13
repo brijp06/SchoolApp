@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .legend div {
+                width: 50px;
+                height: 30px;
+                border-radius: 5px;
+            }
+
+            .legend label {
+                margin-left: 10px;
+                font-size: 16px;
+                color: #333;
+                margin-right: 20px;
+            }
+
+        .calendar-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Dashboard","Home")'">Home</button>
+    </div>
+    <div class="container">
+        <h1>Attendance Calendar</h1>
+
+        <!-- Legend for Present and Absent -->
+        <div class="legend">
+            <!-- Present (Green) -->
+            <div style="background-color: #28a745;"></div>
+            <label>Present</label>
+
+            <!-- Absent (Red) -->
+            <div style="background-color: #dc3545;"></div>
+            <label>Absent</label>
+        </div>
+
+        <!-- Calendar Container -->
+
+
+
+    </div>
+    <div id="calendar"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        url: '/Attanceshow/Getattancedata',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            startdate: fetchInfo.startStr,
+                            enddate: fetchInfo.endStr
+                        }),
+                        success: function (result) {
+                            var events = [];
+                            $.each(result, function (index, item) {
+                                events.push({
+                                    start: item.date,
+                                    color: item.color,
+                                    display: 'background'
+                                });
+                            });
+
+                            successCallback(events);
+                        },
+                        error: function (error) {
+                            console.error('Error:', error.responseJSON ? error.responseJSON.error : error);
+                            failureCallback(error);
+                        }
+                    });
+                },
+                datesSet: function (info) {
+                    console.log("Month changed:", info.startStr);
+                }
+            });
+            calendar.render();
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+

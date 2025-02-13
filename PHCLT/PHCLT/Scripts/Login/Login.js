@@ -9,7 +9,7 @@
     if (upassword != "") {
         $('#txtpass').val(upassword)
     }
-   
+
 
     function getUrlParameter(name) {
         var urlParams = new URLSearchParams(window.location.search);
@@ -19,7 +19,7 @@
     // Check if the URL has the "isAuth" parameter
     var isAuthValue = getUrlParameter('isAuth');
 
-    if (isAuthValue !== null) {                
+    if (isAuthValue !== null) {
 
         // Example: Show an alert based on the isAuth value
         if (isAuthValue === 'false') {
@@ -29,7 +29,7 @@
             });
         }
         else {
-           
+
 
         }
     }
@@ -51,8 +51,20 @@
                 } else {
 
                 }
-                window.location.href = '/home/Dashboard';
-               
+                if (result.UserType == "Admin") {
+                    window.location.href = '/home/NewDashboard';
+                }
+                else if (result.UserType == "Student") {
+                    window.location.href = '/home/Dashboard';
+
+                }
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops... Username or Passowrd is Incorrent",
+                    });
+                }
+
             },
             error: function (error) {
                 // Handle the error response

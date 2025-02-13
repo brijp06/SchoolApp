@@ -20,7 +20,7 @@ namespace PHCLT.Controllers
 
         public Int32 excute(string sql)
         {
-            cn.ConnectionString=ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+            cn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
             SqlCommand cmd = new SqlCommand(sql, cn);
             cn.Open();
             cmd.ExecuteNonQuery();
@@ -30,11 +30,11 @@ namespace PHCLT.Controllers
 
         public DataTable Returntable(string sql)
         {
-            DataTable dt=null;
+            DataTable dt = null;
             cn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
             SqlDataAdapter adp = new SqlDataAdapter(sql, cn);
             cn.Open();
-            DataSet  ds=new DataSet();
+            DataSet ds = new DataSet();
             adp.Fill(ds);
             cn.Close();
             dt = ds.Tables[0];
@@ -86,11 +86,11 @@ namespace PHCLT.Controllers
             adp.Fill(ds);
             cn.Close();
             dt = ds.Tables[0];
-            if (dt.Rows.Count > 0) 
-                {
+            if (dt.Rows.Count > 0)
+            {
                 Onestr = dt.Rows[0][0].ToString();
-                }
-                
+            }
+
             return Onestr;
         }
 
@@ -173,7 +173,7 @@ namespace PHCLT.Controllers
                 {
                     connection.Open();
 
-                    string stringUserQuery = "SELECT UserName, UserId,UsesFullname FROM UserMaster WHERE UserName = @UserName AND Password = @Password";                    
+                    string stringUserQuery = "SELECT UserName, UserId,UsesFullname FROM UserMaster WHERE UserName = @UserName AND Password = @Password";
 
                     using (SqlCommand command = new SqlCommand(stringUserQuery, connection))
                     {
@@ -191,9 +191,77 @@ namespace PHCLT.Controllers
                                 loginResponse.UserId = Convert.ToInt32(reader["UserId"]);
                                 loginResponse.UsesFullname = reader["UsesFullname"].ToString();
                             }
+                            else
+                            {
+                                DataTable dt = Returntable("select * from StudentMaster where Mobile='" + UserName + "'");
+                                if (dt.Rows.Count > 0)
+                                {
+                                    if (dt.Rows.Count == 1)
+                                    {
+                                        string pass = "";
+                                        if (dt.Rows[0]["Dname"].ToString() == "STD-9")
+                                        {
+                                            pass = "Admin9";
+
+                                        }
+                                        if (dt.Rows[0]["Dname"].ToString() == "STD-10")
+                                        {
+                                            pass = "Admin10";
+                                        }
+                                        if (dt.Rows[0]["Dname"].ToString() == "STD-11")
+                                        {
+                                            pass = "Admin11";
+                                        }
+                                        if (dt.Rows[0]["Dname"].ToString() == "STD-12")
+                                        {
+                                            pass = "Admin12";
+                                        }
+                                        if (Password == pass)
+                                        {
+                                            loginResponse.UserType = "Student";
+                                            loginResponse.Username = dt.Rows[0]["Sname"].ToString();
+                                            loginResponse.UserId = Convert.ToInt32(dt.Rows[0]["Studentid"]);
+                                            loginResponse.UsesFullname = dt.Rows[0]["Sname"].ToString();
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        for (int i=0;i<=dt.Rows.Count-1;i++)
+                                        {
+                                            string pass = "";
+                                            if (dt.Rows[i]["Dname"].ToString() == "STD-9")
+                                            {
+                                                pass = "Admin9";
+
+                                            }
+                                            if (dt.Rows[i]["Dname"].ToString() == "STD-10")
+                                            {
+                                                pass = "Admin10";
+                                            }
+                                            if (dt.Rows[i]["Dname"].ToString() == "STD-11")
+                                            {
+                                                pass = "Admin11";
+                                            }
+                                            if (dt.Rows[i]["Dname"].ToString() == "STD-12")
+                                            {
+                                                pass = "Admin12";
+                                            }
+                                            if (Password == pass)
+                                            {
+                                                loginResponse.UserType = "Student";
+                                                loginResponse.Username = dt.Rows[i]["Sname"].ToString();
+                                                loginResponse.UserId = Convert.ToInt32(dt.Rows[i]["Studentid"]);
+                                                loginResponse.UsesFullname = dt.Rows[i]["Sname"].ToString();
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
                         }
                     }
-                    
+
                     return loginResponse;
                 }
             }
@@ -209,7 +277,7 @@ namespace PHCLT.Controllers
             {
                 LoginResponse loginResponse = new LoginResponse
                 {
-                    UserType = "",  
+                    UserType = "",
                     Username = "",
                     UserId = 0,
                     CustomerId = 0,

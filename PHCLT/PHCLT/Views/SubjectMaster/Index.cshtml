@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Subject Master</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="cmbrPHCCenter">Standard</label>
+                                <select class="form-control select2" id="Standard"  style="width: 100%;">
+                                    <option selected="selected" value="0">Select a Standard</option>
+
+                                    @foreach (var phc in ViewBag.standerList)
+                                    {
+                                        <option value="@phc.id">@phc.Stdname</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Subject Name</label>
+                                <input type="text" class="form-control" id="subjectname" placeholder="Enter Subject Name">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="button" id="btnsave" class="btn btn-primary">Save</button>
+                            <button type="button" id="btnviewlist" class="btn btn-primary">View List</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AdminLTE -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/plugins/toastr/toastr.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/Scripts/SubjectMaster/Subjectmaster.js"></script>

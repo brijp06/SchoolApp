@@ -106,7 +106,7 @@
     }
 
     $('#resetSubCenter').on('click', function () {
-        const url = `/PHCdetail/SubCenterList`;
+        const url = `/PHCdetail/SubjectMasterList`;
         window.location.href = url;
     });
 
